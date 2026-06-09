@@ -3,12 +3,21 @@
     <q-header style="background-color: #1a325a" class="text-white">
       <q-toolbar>
         <q-btn flat dense round icon="menu" aria-label="Menu" @click="toggleLeftDrawer" />
-        <q-toolbar-title>Sistema</q-toolbar-title>
+        <q-toolbar-title>MeAjuda</q-toolbar-title>
       </q-toolbar>
     </q-header>
 
     <q-drawer v-model="leftDrawerOpen" show-if-above bordered :width="250" class="bg-white">
-      <q-list class="q-mt-md">
+      <div class="column items-center q-pa-lg bg-white text-center">
+        <q-avatar size="80px" class="q-mb-sm shadow-1">
+          <img src="~assets/logo.png" alt="Logo MeAjuda" />
+        </q-avatar>
+
+        <div class="text-subtitle1 text-weight-bold text-grey-9">MeAjuda</div>
+      </div>
+
+      <q-separator />
+      <q-list class="q-mt-sm">
         <q-item
           v-for="link in menuLinks"
           :key="link.title"
