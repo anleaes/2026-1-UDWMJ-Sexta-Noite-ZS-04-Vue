@@ -7,7 +7,7 @@ const routes = [
       { path: '', name: 'Home', component: () => import('pages/IndexPage.vue') },
       { path: 'servicos', name: 'Servicos', component: () => import('pages/ServicosPage.vue') },
       { path: 'secretarias', name: 'Secretarias', component: () => import('pages/SecretariasPage.vue') },
-      {path: 'cidadaos', name: 'Cidadaos', component: () => import('pages/CidadaosPage.vue') },
+      { path: 'cidadaos', name: 'Cidadaos', component: () => import('pages/CidadaosPage.vue') },
       { path: 'funcionarios', name: 'Funcionarios', component: () => import('pages/FuncionariosPage.vue') },
       { path: 'equipamentos', name: 'Equipamentos', component: () => import('pages/EquipamentosPage.vue') },
 
@@ -24,6 +24,7 @@ const routes = [
       { path: 'cidadaos/editar', name: 'EditarCidadao', component: () => import('pages/EditarCidadaoPage.vue') },
       { path: 'equipamentos/criar', name: 'CriarEquipamento', component: () => import('pages/CriarEquipamentoPage.vue') },
       { path: 'equipamentos/editar', name: 'EditarEquipamento', component: () => import('pages/EditarEquipamentoPage.vue') },
+      { path: 'ocorrencias/criar', name: 'CriarOcorrencia', component: () => import('pages/CriarOcorrenciaPage.vue') },
       // ... Adicione as demais rotas seguindo esta lógica
     ]
   },
