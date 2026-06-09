@@ -36,6 +36,7 @@ import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { api } from 'boot/axios'
 import InfoCard from 'components/InfoCard.vue'
+import { funcionariosService } from 'src/services/funcionariosService'
 
 const router = useRouter()
 const funcionarios = ref([])
@@ -44,8 +45,7 @@ const loading = ref(true)
 const fetchFuncionarios = async () => {
   loading.value = true
   try {
-    const response = await api.get('funcionarios/api/')
-    funcionarios.value = response.data
+    funcionarios.value = await funcionariosService.getAll()
   } catch (error) {
     console.error('Erro ao buscar funcionários:', error)
   } finally {
@@ -59,7 +59,7 @@ onMounted(() => {
 
 const excluirFuncionario = async (id) => {
   try {
-    await api.delete(`funcionarios/api/${id}/`)
+    await funcionariosService.delete(id)
     funcionarios.value = funcionarios.value.filter((f) => f.id !== id)
   } catch (error) {
     const errorMsg = error.response?.data ? JSON.stringify(error.response.data) : error.message

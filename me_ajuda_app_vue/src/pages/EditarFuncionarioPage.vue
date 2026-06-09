@@ -94,6 +94,7 @@
 import { ref, onMounted } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import { api } from 'boot/axios'
+import { funcionariosService } from 'src/services/funcionariosService'
 
 const router = useRouter()
 const route = useRoute()
@@ -162,7 +163,7 @@ const handleSave = async () => {
         .filter((n) => !isNaN(n)),
     }
 
-    await api.put(`funcionarios/api/${funcionarioId}/`, payload)
+    await funcionariosService.update(funcionarioId, payload)
 
     router.push({ name: 'Funcionarios' })
   } catch (error) {
