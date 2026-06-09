@@ -22,6 +22,8 @@ const routes = [
       { path: 'secretarias/editar', name: 'EditarSecretaria', component: () => import('pages/EditarSecretariaPage.vue') },
       { path: 'cidadaos/criar', name: 'CriarCidadao', component: () => import('pages/CriarCidadaoPage.vue') },
       { path: 'cidadaos/editar', name: 'EditarCidadao', component: () => import('pages/EditarCidadaoPage.vue') },
+      { path: 'equipamentos/criar', name: 'CriarEquipamento', component: () => import('pages/CriarEquipamentoPage.vue') },
+      { path: 'equipamentos/editar', name: 'EditarEquipamento', component: () => import('pages/EditarEquipamentoPage.vue') },
       // ... Adicione as demais rotas seguindo esta lógica
     ]
   },
