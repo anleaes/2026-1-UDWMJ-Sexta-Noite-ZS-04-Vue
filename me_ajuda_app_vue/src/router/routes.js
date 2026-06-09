@@ -11,7 +11,7 @@ const routes = [
       {path:'servicos/criar', name: 'CriarServico', component: () => import('pages/CriarServicoPage.vue') },
       {path:'servicos/editar', name: 'EditarServico', component: () => import('pages/EditarServicoPage.vue') },
       {path: 'secretarias/criar', name: 'CriarSecretaria', component: () => import('pages/CriarSecretariaPage.vue') },
-      // { path: 'cidadaos/editar/:id', name: 'EditarCidadao', component: () => import('pages/EditarCidadaoScreen.vue') },
+      {path: 'secretarias/editar', name: 'EditarSecretaria', component: () => import('pages/EditarSecretariaPage.vue') },
 
       // ... Adicione as demais rotas seguindo esta lógica
     ]
