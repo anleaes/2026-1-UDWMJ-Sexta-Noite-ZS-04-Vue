@@ -41,7 +41,7 @@
 
       <div class="row justify-end q-mt-xl">
         <q-btn 
-          label="Cancelar" 
+          label="Voltar" 
           color="grey-7" 
           flat 
           class="q-mr-sm" 
