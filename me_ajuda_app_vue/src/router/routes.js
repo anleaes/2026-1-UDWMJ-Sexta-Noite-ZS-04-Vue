@@ -7,6 +7,7 @@ const routes = [
       { path: '', name: 'Home', component: () => import('pages/IndexPage.vue') },
       { path: 'servicos', name: 'Servicos', component: () => import('pages/ServicosPage.vue') },
       { path: 'secretarias', name: 'Secretarias', component: () => import('pages/SecretariasPage.vue') },
+      {path: 'cidadaos', name: 'Cidadaos', component: () => import('pages/CidadaosPage.vue') },
       { path: 'funcionarios', name: 'Funcionarios', component: () => import('pages/FuncionariosPage.vue') },
       // Telas "Ocultas" (Exemplo de Criar e Editar)
       { path: 'servicos/criar', name: 'CriarServico', component: () => import('pages/CriarServicoPage.vue') },
