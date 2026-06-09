@@ -5,7 +5,7 @@ const routes = [
     children: [
       // Telas do Menu
       { path: '', name: 'Home', component: () => import('pages/IndexPage.vue') },
-      // { path: 'cidadaos', name: 'Cidadaos', component: () => import('pages/CidadaosScreen.vue') },
+      { path: 'servicos', name: 'Servicos', component: () => import('pages/ServicosPage.vue') },
 
       // Telas "Ocultas" (Exemplo de Criar e Editar)
       // { path: 'cidadaos/criar', name: 'CriarCidadao', component: () => import('pages/CriarCidadaoScreen.vue') },
