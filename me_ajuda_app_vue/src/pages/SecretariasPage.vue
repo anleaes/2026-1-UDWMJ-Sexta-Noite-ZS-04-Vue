@@ -7,47 +7,18 @@
     </div>
 
     <div v-else class="q-pb-xl">
-      <q-card
+      <InfoCard
         v-for="item in secretarias"
         :key="item.id"
-        class="q-mb-md shadow-2"
-        style="background-color: #f0f4ff; border-radius: 10px"
-      >
-        <q-card-section>
-          <div class="row justify-between items-center">
-            <div class="text-h6 text-weight-bold text-grey-10 col">
-              {{ item.nome }}
-            </div>
-            <q-badge
-              color="primary"
-              class="text-weight-bold q-px-sm q-py-xs"
-              style="border-radius: 12px; font-size: 12px"
-            >
-              ID: {{ item.id }}
-            </q-badge>
-          </div>
-
-          <div v-if="item.descricao" class="text-body2 text-grey-7 q-mt-sm q-mb-sm">
-            {{ item.descricao }}
-          </div>
-        </q-card-section>
-
-        <q-card-actions align="right" class="q-pt-none">
-          <q-btn
-            unelevated
-            style="background-color: #4b7be5; color: white"
-            class="q-mr-sm"
-            label="Editar"
-            @click="irParaEdicao(item)"
-          />
-          <q-btn
-            unelevated
-            style="background-color: #e54848; color: white"
-            label="Excluir"
-            @click="handleDelete(item.id)"
-          />
-        </q-card-actions>
-      </q-card>
+        :id="item.id"
+        :nome="`${item.nome} (${item.sigla})`"
+        :dados="{
+          ID: item.id,
+          Descrição: item.descricao,
+        }"
+        @editar="irParaEdicao(item)"
+        @excluir="handleDelete(item.id)"
+      />
 
       <div v-if="secretarias.length === 0" class="text-center text-grey-6 q-mt-xl">
         Nenhuma secretaria encontrada.
@@ -69,6 +40,7 @@
 import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { useQuasar } from 'quasar'
+import InfoCard from 'components/InfoCard.vue'
 
 const router = useRouter()
 const $q = useQuasar()
