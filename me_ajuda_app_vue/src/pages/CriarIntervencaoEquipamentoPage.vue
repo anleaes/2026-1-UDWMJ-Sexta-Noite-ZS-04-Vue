@@ -145,7 +145,6 @@ const adicionarEmAlocacao = () => {
     id_temporario: Math.random().toString(36).substring(2, 9),
     equipamento: parseInt(equipamentoId.value),
     horas_usado: parseInt(horasUsado.value),
-    // Garantindo que seja numérico caso o usuário digite vírgula em vez de ponto
     custo_total: parseFloat(String(custoTotal.value).replace(',', '.')),
   }
 

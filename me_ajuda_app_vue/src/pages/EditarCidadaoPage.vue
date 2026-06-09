@@ -1,12 +1,12 @@
 <template>
   <q-page class="bg-white q-pa-md">
-    <div class="text-h5 text-weight-bold text-center q-mb-lg text-grey-9">
-      Editar Cidadão
-    </div>
+    <div class="text-h5 text-weight-bold text-center q-mb-lg text-grey-9">Editar Cidadão</div>
 
     <q-form @submit="handleSave" class="q-gutter-md">
-      
-      <div class="text-h6 text-weight-bold q-mt-lg q-mb-sm q-pb-xs" style="color: #4B7BE5; border-bottom: 1px solid #eee;">
+      <div
+        class="text-h6 text-weight-bold q-mt-lg q-mb-sm q-pb-xs"
+        style="color: #4b7be5; border-bottom: 1px solid #eee"
+      >
         Dados Básicos
       </div>
 
@@ -15,7 +15,7 @@
         v-model="form.nome"
         label="Nome *"
         lazy-rules
-        :rules="[val => !!val || 'Por favor, preencha o nome']"
+        :rules="[(val) => !!val || 'Por favor, preencha o nome']"
       />
 
       <q-input
@@ -23,7 +23,7 @@
         v-model="form.sobrenome"
         label="Sobrenome *"
         lazy-rules
-        :rules="[val => !!val || 'Por favor, preencha o sobrenome']"
+        :rules="[(val) => !!val || 'Por favor, preencha o sobrenome']"
       />
 
       <q-input
@@ -32,7 +32,7 @@
         label="CPF *"
         type="number"
         lazy-rules
-        :rules="[val => !!val || 'Por favor, preencha o CPF']"
+        :rules="[(val) => !!val || 'Por favor, preencha o CPF']"
       />
 
       <q-input
@@ -41,7 +41,7 @@
         label="E-mail *"
         type="email"
         lazy-rules
-        :rules="[val => !!val || 'Por favor, preencha o e-mail']"
+        :rules="[(val) => !!val || 'Por favor, preencha o e-mail']"
       />
 
       <q-input
@@ -50,71 +50,54 @@
         label="ID do User *"
         type="number"
         lazy-rules
-        :rules="[val => !!val || 'Por favor, preencha o ID do usuário']"
+        :rules="[(val) => !!val || 'Por favor, preencha o ID do usuário']"
       />
 
-
-      <div class="text-h6 text-weight-bold q-mt-lg q-mb-sm q-pb-xs" style="color: #4B7BE5; border-bottom: 1px solid #eee;">
+      <div
+        class="text-h6 text-weight-bold q-mt-lg q-mb-sm q-pb-xs"
+        style="color: #4b7be5; border-bottom: 1px solid #eee"
+      >
         Dados do Cidadão
       </div>
 
-      <q-input
-        outlined
-        v-model="form.fone"
-        label="Telefone"
-        type="tel"
-      />
+      <q-input outlined v-model="form.fone" label="Telefone" type="tel" />
 
-      <q-input
-        outlined
-        v-model="form.endereco"
-        label="Endereço"
-      />
+      <q-input outlined v-model="form.endereco" label="Endereço" />
 
-      <q-input
-        outlined
-        v-model="form.cep"
-        label="CEP"
-        type="number"
-      />
+      <q-input outlined v-model="form.cep" label="CEP" type="number" />
 
-      <q-input
-        outlined
-        v-model="form.bairro"
-        label="Bairro"
-      />
+      <q-input outlined v-model="form.bairro" label="Bairro" />
 
       <div class="column q-mt-xl q-gutter-y-sm">
-        <q-btn 
-          label="Salvar" 
-          style="background-color: #4B7BE5 !important; color: white;"
-          type="submit" 
-          :loading="saving" 
+        <q-btn
+          label="Salvar"
+          style="background-color: #4b7be5 !important; color: white"
+          type="submit"
+          :loading="saving"
         />
-        <q-btn 
-          label="Voltar" 
-          style="background-color: #6c757d !important; color: white;" 
+        <q-btn
+          label="Voltar"
+          style="background-color: #6c757d !important; color: white"
           unelevated
-          @click="voltar" 
+          @click="voltar"
         />
       </div>
-      
-      <div style="height: 40px;"></div>
+
+      <div style="height: 40px"></div>
     </q-form>
   </q-page>
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue';
-import { useRouter } from 'vue-router';
-import { useQuasar } from 'quasar';
+import { ref, onMounted } from 'vue'
+import { useRouter } from 'vue-router'
+import { useQuasar } from 'quasar'
 
-const router = useRouter();
-const $q = useQuasar();
+const router = useRouter()
+const $q = useQuasar()
 
-const cidadaoId = ref(null);
+const cidadaoId = ref(null)
 
-// Agrupamos todos os campos em um único objeto form
 const form = ref({
   nome: '',
   sobrenome: '',
@@ -124,39 +107,37 @@ const form = ref({
   endereco: '',
   cep: '',
   bairro: '',
-  userId: ''
-});
+  userId: '',
+})
 
-const saving = ref(false);
+const saving = ref(false)
 
-// Substitui o useEffect: Recupera os dados enviados pela tela de listagem
 onMounted(() => {
-  const stateCidadao = history.state.cidadao;
-  
+  const stateCidadao = history.state.cidadao
+
   if (stateCidadao) {
-    const cidadao = JSON.parse(stateCidadao);
-    cidadaoId.value = cidadao.id;
-    form.value.nome = cidadao.nome || '';
-    form.value.sobrenome = cidadao.sobrenome || '';
-    form.value.cpf = cidadao.cpf || '';
-    form.value.email = cidadao.email || '';
-    form.value.fone = cidadao.fone || '';
-    form.value.endereco = cidadao.endereco || '';
-    form.value.cep = cidadao.cep || '';
-    form.value.bairro = cidadao.bairro || '';
-    form.value.userId = cidadao.user ? String(cidadao.user) : '';
+    const cidadao = JSON.parse(stateCidadao)
+    cidadaoId.value = cidadao.id
+    form.value.nome = cidadao.nome || ''
+    form.value.sobrenome = cidadao.sobrenome || ''
+    form.value.cpf = cidadao.cpf || ''
+    form.value.email = cidadao.email || ''
+    form.value.fone = cidadao.fone || ''
+    form.value.endereco = cidadao.endereco || ''
+    form.value.cep = cidadao.cep || ''
+    form.value.bairro = cidadao.bairro || ''
+    form.value.userId = cidadao.user ? String(cidadao.user) : ''
   } else {
-    // Se acessar a rota diretamente sem passar dados, volta para a lista
     $q.notify({
       type: 'warning',
       message: 'Nenhum dado encontrado para edição. Retornando...',
-    });
-    router.push({ name: 'Cidadaos' });
+    })
+    router.push({ name: 'Cidadaos' })
   }
-});
+})
 
 const handleSave = async () => {
-  saving.value = true;
+  saving.value = true
 
   try {
     const res = await fetch(`http://localhost:8000/cidadaos/api/${cidadaoId.value}/`, {
@@ -167,43 +148,41 @@ const handleSave = async () => {
         sobrenome: form.value.sobrenome,
         cpf: form.value.cpf,
         email: form.value.email,
-        user: parseInt(form.value.userId), // Converte para int conforme o original
+        user: parseInt(form.value.userId),
         fone: form.value.fone,
         endereco: form.value.endereco,
         cep: form.value.cep,
-        bairro: form.value.bairro
+        bairro: form.value.bairro,
       }),
-    });
+    })
 
     if (!res.ok) {
-      const errorData = await res.json();
+      const errorData = await res.json()
       $q.notify({
         type: 'negative',
         message: 'Erro de API: ' + JSON.stringify(errorData),
-      });
-      saving.value = false;
-      return;
+      })
+      saving.value = false
+      return
     }
-    
+
     $q.notify({
       type: 'positive',
-      message: 'Cidadão atualizado com sucesso!'
-    });
+      message: 'Cidadão atualizado com sucesso!',
+    })
 
-    // Navega de volta para a lista
-    router.push({ name: 'Cidadaos' });
-    
+    router.push({ name: 'Cidadaos' })
   } catch (error) {
     $q.notify({
       type: 'negative',
-      message: 'Erro de conexão com a API.'
-    });
+      message: 'Erro de conexão com a API.',
+    })
   } finally {
-    saving.value = false;
+    saving.value = false
   }
-};
+}
 
 const voltar = () => {
-  router.push({ name: 'Cidadaos' });
-};
+  router.push({ name: 'Cidadaos' })
+}
 </script>
