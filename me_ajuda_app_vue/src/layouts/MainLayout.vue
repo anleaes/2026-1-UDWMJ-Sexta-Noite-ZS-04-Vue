@@ -66,6 +66,6 @@ const menuLinks = [
   { title: 'Ocorrências', icon: 'error_outline', routeName: 'Ocorrencias' },
   { title: 'Equipamentos', icon: 'construction', routeName: 'Equipamentos' },
   { title: 'Intervenções', icon: 'handyman', routeName: 'Intervencoes' },
-  { title: 'Alocação de Equip.', icon: 'engineering', routeName: 'IntervencoesEquipamentos' },
+  { title: 'Alocações de Equip.', icon: 'engineering', routeName: 'IntervencoesEquipamentos' },
 ]
 </script>
