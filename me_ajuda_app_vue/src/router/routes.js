@@ -13,7 +13,7 @@ const routes = [
       {path: 'secretarias/criar', name: 'CriarSecretaria', component: () => import('pages/CriarSecretariaPage.vue') },
       { path: 'funcionarios/criar', name: 'CriarFuncionario', component: () => import('pages/CriarFuncionarioPage.vue') },
 
-      // { path: 'cidadaos/editar/:id', name: 'EditarCidadao', component: () => import('pages/EditarCidadaoScreen.vue') },
+      {path: 'secretarias/editar', name: 'EditarSecretaria', component: () => import('pages/EditarSecretariaPage.vue') },
 
       // ... Adicione as demais rotas seguindo esta lógica
     ]
