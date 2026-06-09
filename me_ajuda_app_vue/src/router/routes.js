@@ -31,7 +31,8 @@ const routes = [
       { path: 'intervencoes/criar', name: 'CriarIntervencao', component: () => import('pages/CriarIntervencaoPage.vue') },
       { path: 'intervencoes/editar/:id', name: 'EditarIntervencao', component: () => import('pages/EditarIntervencaoPage.vue') },
       { path: 'protocolos/:id', name: 'VerProtocolo', component: () => import('pages/VerProtocoloPage.vue') },
-      { path: 'alocacoe/criar', name: 'CriarIntervencaoEquipamento', component: () => import('pages/CriarIntervencaoEquipamentoPage.vue') },
+      { path: 'alocacoes/criar', name: 'CriarIntervencaoEquipamento', component: () => import('pages/CriarIntervencaoEquipamentoPage.vue') },
+      { path: 'alocacoes/editar/:id', name: 'EditarIntervencaoEquipamento', component: () => import('pages/EditarIntervencaoEquipamentoPage.vue') },
       // ... Adicione as demais rotas seguindo esta lógica
     ]
   },
