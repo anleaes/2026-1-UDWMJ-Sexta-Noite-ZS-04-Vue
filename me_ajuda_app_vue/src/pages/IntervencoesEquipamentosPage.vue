@@ -17,7 +17,7 @@
         :subtitulo="`Intervenção: ${item.intervencao} | Equipamento: ${item.equipamento}`"
         :dados="{
           'Horas de Uso': item.horas_usado,
-          'Custo Total': `R$ ${Number(item.custo_total).toFixed(2)}`,
+          'Custo Total': `R$ ${Number(item.custo_total).toFixed(2).replace('.', ',')}`,
         }"
         @editar="irParaEdicao"
         @excluir="excluirAlocacao"
