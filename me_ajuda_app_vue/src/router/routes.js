@@ -15,6 +15,7 @@ const routes = [
       { path: 'secretarias/criar', name: 'CriarSecretaria', component: () => import('pages/CriarSecretariaPage.vue') },
       { path: 'funcionarios/criar', name: 'CriarFuncionario', component: () => import('pages/CriarFuncionarioPage.vue') },
 
+      { path: 'funcionarios/editar/:id', name: 'EditarFuncionario', component: () => import('pages/EditarFuncionarioPage.vue') },
       { path: 'secretarias/editar', name: 'EditarSecretaria', component: () => import('pages/EditarSecretariaPage.vue') },
       { path: 'cidadaos/criar', name: 'CriarCidadao', component: () => import('pages/CriarCidadaoPage.vue') },
       { path: 'cidadaos/editar', name: 'EditarCidadao', component: () => import('pages/EditarCidadaoPage.vue') },
