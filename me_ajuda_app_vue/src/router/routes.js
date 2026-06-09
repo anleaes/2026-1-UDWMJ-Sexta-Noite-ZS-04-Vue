@@ -7,6 +7,7 @@ const routes = [
       { path: '', name: 'Home', component: () => import('pages/IndexPage.vue') },
       { path: 'servicos', name: 'Servicos', component: () => import('pages/ServicosPage.vue') },
       { path: 'secretarias', name: 'Secretarias', component: () => import('pages/SecretariasPage.vue') },
+      {path: 'cidadaos', name: 'Cidadaos', component: () => import('pages/CidadaosPage.vue') },
       { path: 'funcionarios', name: 'Funcionarios', component: () => import('pages/FuncionariosPage.vue') },
       // Telas "Ocultas" (Exemplo de Criar e Editar)
       { path: 'servicos/criar', name: 'CriarServico', component: () => import('pages/CriarServicoPage.vue') },
@@ -16,7 +17,8 @@ const routes = [
 
       { path: 'funcionarios/editar/:id', name: 'EditarFuncionario', component: () => import('pages/EditarFuncionarioPage.vue') },
       { path: 'secretarias/editar', name: 'EditarSecretaria', component: () => import('pages/EditarSecretariaPage.vue') },
-
+      { path: 'cidadaos/criar', name: 'CriarCidadao', component: () => import('pages/CriarCidadaoPage.vue') },
+      { path: 'cidadaos/editar', name: 'EditarCidadao', component: () => import('pages/EditarCidadaoPage.vue') },
       // ... Adicione as demais rotas seguindo esta lógica
     ]
   },
