@@ -6,42 +6,22 @@
       <q-spinner color="primary" size="3em" />
     </div>
 
-    <div v-else class="q-pb-xl">
-      <q-card
+    <div v-else>
+      <InfoCard
         v-for="item in cidadaos"
         :key="item.id"
-        class="q-mb-md shadow-2"
-        style="background-color: #f0f4ff; border-radius: 10px"
-      >
-        <q-card-section>
-          <div class="row justify-between items-start q-mb-sm">
-            <div class="text-h6 text-weight-bold text-grey-10 col">
-              {{ item.nome }} {{ item.sobrenome }}
-            </div>
-          </div>
-
-          <div class="text-subtitle2 text-weight-medium text-grey-8">ID Cidadão: {{ item.id }}</div>
-          <div class="text-subtitle2 text-weight-medium text-grey-8">ID User: {{ item.user }}</div>
-          <div class="text-subtitle2 text-weight-medium text-grey-8">E-mail: {{ item.email }}</div>
-          <div class="text-subtitle2 text-weight-medium text-grey-8">CPF: {{ item.cpf }}</div>
-        </q-card-section>
-
-        <q-card-actions align="right" class="q-pt-none">
-          <q-btn
-            unelevated
-            style="background-color: #4b7be5; color: white"
-            class="q-mr-sm"
-            label="Editar"
-            @click="irParaEdicao(item)"
-          />
-          <q-btn
-            unelevated
-            style="background-color: #e54848; color: white"
-            label="Excluir"
-            @click="handleDelete(item.id)"
-          />
-        </q-card-actions>
-      </q-card>
+        :id="item.id"
+        :nome="`${item.nome} ${item.sobrenome}`"
+        :dados="{
+          'ID Cidadão': item.id,
+          'ID User': item.user,
+          'E-mail': item.email,
+          CPF: item.cpf,
+          Telefone: item.fone,
+        }"
+        @editar="irParaEdicao(item)"
+        @excluir="handleDelete(item.id)"
+      />
 
       <div v-if="cidadaos.length === 0" class="text-center text-grey-6 q-mt-xl">
         Nenhum cidadão encontrado.
@@ -63,6 +43,7 @@
 import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { useQuasar } from 'quasar'
+import InfoCard from 'components/InfoCard.vue'
 
 const router = useRouter()
 const $q = useQuasar()

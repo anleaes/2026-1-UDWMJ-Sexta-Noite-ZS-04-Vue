@@ -7,52 +7,30 @@
     </div>
 
     <div v-else class="q-pb-xl">
-      <q-card
+      <InfoCard
         v-for="item in equipamentos"
         :key="item.id"
-        class="q-mb-md shadow-2"
-        style="background-color: #f0f4ff; border-radius: 10px"
+        :id="item.id"
+        :nome="item.nome"
+        :dados="{
+          ID: item.id,
+          Descrição: item.descricao,
+          'Preço/Hora': `R$ ${Number(item.preco).toFixed(2).replace('.', ',')}`,
+        }"
+        @editar="irParaEdicao(item)"
+        @excluir="handleDelete(item.id)"
       >
-        <q-card-section>
-          <div class="row justify-between items-center">
-            <div class="text-h6 text-weight-bold text-grey-10 col">
-              {{ item.nome }}
-            </div>
-            <q-badge
-              :style="{ backgroundColor: item.disponivel ? '#28a745' : '#6c757d' }"
-              text-color="white"
-              class="text-weight-bold q-px-sm q-py-xs q-ml-sm"
-              style="border-radius: 12px; font-size: 12px"
-            >
-              {{ item.disponivel ? 'Disponível' : 'Indisponível' }}
-            </q-badge>
-          </div>
-
-          <div class="text-subtitle2 text-weight-medium text-grey-8 q-mt-xs">ID: {{ item.id }}</div>
-          <div class="text-body2 text-grey-7 q-mt-sm">
-            {{ item.descricao }}
-          </div>
-          <div class="text-subtitle2 text-weight-bold q-mt-sm" style="color: #0d47a1">
-            Preço/Hora: R$ {{ Number(item.preco).toFixed(2).replace('.', ',') }}
-          </div>
-        </q-card-section>
-
-        <q-card-actions align="right" class="q-pt-none">
-          <q-btn
-            unelevated
-            style="background-color: #4b7be5; color: white"
-            class="q-mr-sm"
-            label="Editar"
-            @click="irParaEdicao(item)"
-          />
-          <q-btn
-            unelevated
-            style="background-color: #e54848; color: white"
-            label="Excluir"
-            @click="handleDelete(item.id)"
-          />
-        </q-card-actions>
-      </q-card>
+        <template #badge>
+          <q-badge
+            :style="{ backgroundColor: item.disponivel ? '#28a745' : '#6c757d' }"
+            text-color="white"
+            class="text-weight-bold q-px-sm q-py-xs q-ml-sm"
+            style="border-radius: 12px; font-size: 12px"
+          >
+            {{ item.disponivel ? 'Disponível' : 'Indisponível' }}
+          </q-badge>
+        </template>
+      </InfoCard>
 
       <div v-if="equipamentos.length === 0" class="text-center text-grey-6 q-mt-xl">
         Nenhum equipamento encontrado.
@@ -74,6 +52,7 @@
 import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { useQuasar } from 'quasar'
+import InfoCard from 'components/InfoCard.vue'
 
 const router = useRouter()
 const $q = useQuasar()
