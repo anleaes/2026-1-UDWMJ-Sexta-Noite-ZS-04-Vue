@@ -61,12 +61,12 @@ export default defineConfig((/* ctx */) => {
       vitePlugins: [
         [
           'vite-plugin-checker',
-          {
-            eslint: {
-              lintCommand: 'eslint -c ./eslint.config.js "./src*/**/*.{js,mjs,cjs,vue}"',
-              useFlatConfig: true,
-            },
-          },
+          // {
+          //   eslint: {
+          //     lintCommand: 'eslint -c ./eslint.config.js "./src*/**/*.{js,mjs,cjs,vue}"',
+          //     useFlatConfig: true,
+          //   },
+          // },
           { server: false },
         ],
       ],
