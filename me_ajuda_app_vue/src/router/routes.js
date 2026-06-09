@@ -27,6 +27,7 @@ const routes = [
       { path: 'equipamentos/editar', name: 'EditarEquipamento', component: () => import('pages/EditarEquipamentoPage.vue') },
       { path: 'ocorrencias/criar', name: 'CriarOcorrencia', component: () => import('pages/CriarOcorrenciaPage.vue') },
       { path: 'ocorrencias/editar/:id', name: 'EditarOcorrencia', component: () => import('pages/EditarOcorrenciaPage.vue') },
+      { path: 'intervencoes/criar', name: 'CriarIntervencao', component: () => import('pages/CriarIntervencaoPage.vue') },
       // ... Adicione as demais rotas seguindo esta lógica
     ]
   },
