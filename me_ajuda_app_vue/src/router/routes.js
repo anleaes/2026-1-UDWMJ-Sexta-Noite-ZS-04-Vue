@@ -9,8 +9,10 @@ const routes = [
       { path: 'funcionarios', name: 'Funcionarios', component: () => import('pages/FuncionariosPage.vue') },
 
       // Telas "Ocultas" (Exemplo de Criar e Editar)
-      {path:'servicos/criar', name: 'CriarServico', component: () => import('pages/CriarServicoPage.vue') },
-      {path:'servicos/editar', name: 'EditarServico', component: () => import('pages/EditarServicoPage.vue') },
+      { path: 'servicos/criar', name: 'CriarServico', component: () => import('pages/CriarServicoPage.vue') },
+      { path: 'servicos/editar', name: 'EditarServico', component: () => import('pages/EditarServicoPage.vue') },
+      { path: 'funcionarios/criar', name: 'CriarFuncionario', component: () => import('pages/CriarFuncionarioPage.vue') },
+
       // { path: 'cidadaos/editar/:id', name: 'EditarCidadao', component: () => import('pages/EditarCidadaoScreen.vue') },
 
       // ... Adicione as demais rotas seguindo esta lógica
