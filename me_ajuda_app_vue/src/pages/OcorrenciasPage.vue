@@ -148,9 +148,9 @@ const formatarStatus = (status) => {
 
 const corDoStatus = (status) => {
   switch (status) {
-    case 'ABE': return 'negative' // Vermelho
-    case 'AND': return 'warning'  // Laranja/Amarelo
-    case 'FEC': return 'positive' // Verde
+    case 'ABE': return 'negative'
+    case 'AND': return 'warning' 
+    case 'FEC': return 'positive'
     default: return 'grey'
   }
 }
