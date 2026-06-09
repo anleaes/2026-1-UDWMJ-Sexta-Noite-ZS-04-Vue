@@ -2,15 +2,22 @@ const routes = [
   {
     path: '/',
     component: () => import('layouts/MainLayout.vue'),
-    children: [{ path: '', component: () => import('pages/IndexPage.vue') }],
-  },
+    children: [
+      // Telas do Menu
+      { path: '', name: 'Home', component: () => import('pages/IndexPage.vue') },
+      // { path: 'cidadaos', name: 'Cidadaos', component: () => import('pages/CidadaosScreen.vue') },
 
-  // Always leave this as last one,
-  // but you can also remove it
+      // Telas "Ocultas" (Exemplo de Criar e Editar)
+      // { path: 'cidadaos/criar', name: 'CriarCidadao', component: () => import('pages/CriarCidadaoScreen.vue') },
+      // { path: 'cidadaos/editar/:id', name: 'EditarCidadao', component: () => import('pages/EditarCidadaoScreen.vue') },
+
+      // ... Adicione as demais rotas seguindo esta lógica
+    ]
+  },
   {
     path: '/:catchAll(.*)*',
-    component: () => import('pages/ErrorNotFound.vue'),
-  },
+    component: () => import('pages/ErrorNotFound.vue')
+  }
 ]
 
 export default routes
