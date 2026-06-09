@@ -12,7 +12,6 @@
         {{ subtitulo }}
       </div>
 
-      <slot name="descricao"></slot>
       <div class="q-mt-md" v-if="dados && Object.keys(dados).length > 0">
         <div
           v-for="(valor, label) in dados"
@@ -25,6 +24,7 @@
     </q-card-section>
 
     <q-card-actions align="right" class="q-pt-none">
+      <slot name="acoes-extras"></slot>
       <q-btn
         unelevated
         style="background-color: #4b7be5; color: white"
