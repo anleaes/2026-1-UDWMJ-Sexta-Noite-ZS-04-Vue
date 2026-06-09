@@ -8,7 +8,7 @@ const routes = [
       { path: 'servicos', name: 'Servicos', component: () => import('pages/ServicosPage.vue') },
 
       // Telas "Ocultas" (Exemplo de Criar e Editar)
-      // { path: 'cidadaos/criar', name: 'CriarCidadao', component: () => import('pages/CriarCidadaoScreen.vue') },
+      {path:'servicos/criar', name: 'CriarServico', component: () => import('pages/CriarServicoPage.vue') },
       // { path: 'cidadaos/editar/:id', name: 'EditarCidadao', component: () => import('pages/EditarCidadaoScreen.vue') },
 
       // ... Adicione as demais rotas seguindo esta lógica
