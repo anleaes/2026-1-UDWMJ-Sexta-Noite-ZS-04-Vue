@@ -2,71 +2,7 @@
   <q-page class="q-pa-md" style="max-width: 600px; margin: 0 auto">
     <div class="text-h5 text-weight-bold text-center q-mb-lg text-grey-9">Nova Intervenção</div>
 
-    <q-form @submit.prevent="handleSave" class="q-gutter-md">
-      <q-input
-        outlined
-        v-model="form.titulo"
-        label="Título *"
-        :rules="[(val) => !!val || 'Campo obrigatório']"
-      />
-
-      <div class="row q-gutter-sm">
-        <q-input
-          outlined
-          v-model="form.dataExec"
-          label="Data de Execução *"
-          mask="##/##/####"
-          placeholder="DD/MM/AAAA"
-          class="col-12 col-sm-6"
-          :rules="[
-            (val) => !!val || 'Campo obrigatório',
-            (val) => val.length === 10 || 'Data inválida',
-          ]"
-        />
-        <q-input
-          outlined
-          v-model="form.custoTrab"
-          label="Custo do Trabalho *"
-          type="number"
-          prefix="R$"
-          step="0.01"
-          class="col-12 col-sm"
-          :rules="[(val) => !!val || 'Campo obrigatório']"
-        />
-      </div>
-
-      <div class="row q-gutter-sm">
-        <q-input
-          outlined
-          v-model="form.ocorrenciaId"
-          label="ID da Ocorrência *"
-          type="number"
-          class="col"
-          :rules="[(val) => !!val || 'Campo obrigatório']"
-        />
-        <q-input
-          outlined
-          v-model="form.funcionarioId"
-          label="ID do Funcionário *"
-          type="number"
-          class="col"
-          :rules="[(val) => !!val || 'Campo obrigatório']"
-        />
-      </div>
-
-      <q-input
-        outlined
-        v-model="form.relato"
-        label="Relato *"
-        type="textarea"
-        :rules="[(val) => !!val || 'Campo obrigatório']"
-      />
-
-      <div class="row q-gutter-sm q-mt-xl">
-        <q-btn type="submit" color="primary" label="Salvar" :loading="saving" class="col" />
-        <q-btn color="grey-7" label="Voltar" @click="voltar" :disable="saving" class="col" />
-      </div>
-    </q-form>
+    <IntervencaoForm :loading="saving" @salvar="handleSave" @voltar="voltar" />
   </q-page>
 </template>
 
@@ -74,33 +10,26 @@
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { api } from 'boot/axios'
+import IntervencaoForm from 'src/components/IntervencaoForm.vue'
+import { intervencoesService } from 'src/services/intervencoesService'
 
 const router = useRouter()
 const saving = ref(false)
 
-const form = ref({
-  titulo: '',
-  dataExec: '',
-  relato: '',
-  custoTrab: '',
-  ocorrenciaId: '',
-  funcionarioId: '',
-})
-
-const handleSave = async () => {
+const handleSave = async (dadosForm) => {
   saving.value = true
 
   try {
     const payload = {
-      titulo: form.value.titulo,
-      data_exec: form.value.dataExec.split('/').reverse().join('-'),
-      relato: form.value.relato,
-      custo_trab: parseFloat(form.value.custoTrab),
-      ocorrencia: parseInt(form.value.ocorrenciaId),
-      funcionario: parseInt(form.value.funcionarioId),
+      titulo: dadosForm.titulo,
+      data_exec: dadosForm.dataExec.split('/').reverse().join('-'),
+      relato: dadosForm.relato,
+      custo_trab: parseFloat(dadosForm.custoTrab),
+      ocorrencia: parseInt(dadosForm.ocorrenciaId),
+      funcionario: parseInt(dadosForm.funcionarioId),
     }
 
-    await api.post('intervencoes/api/', payload)
+    await intervencoesService.create(payload)
 
     router.push({ name: 'Intervencoes' })
   } catch (error) {
