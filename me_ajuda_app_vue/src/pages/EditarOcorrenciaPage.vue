@@ -6,81 +6,13 @@
       <q-spinner color="primary" size="3em" />
     </div>
 
-    <q-form v-else @submit.prevent="handleSave" class="q-gutter-md">
-      <q-input
-        outlined
-        v-model="form.titulo"
-        label="Título *"
-        :rules="[(val) => !!val || 'Obrigatório']"
-      />
-
-      <div class="row q-gutter-sm">
-        <q-input
-          outlined
-          v-model="form.endereco"
-          label="Endereço *"
-          class="col-12 col-sm-8"
-          :rules="[(val) => !!val || 'Obrigatório']"
-        />
-        <q-input
-          outlined
-          v-model="form.numero"
-          label="Número"
-          type="number"
-          class="col-12 col-sm"
-        />
-      </div>
-
-      <q-input outlined v-model="form.complemento" label="Complemento" />
-
-      <div class="row q-gutter-sm">
-        <q-input
-          outlined
-          v-model="form.cidadaoId"
-          label="ID do Cidadão *"
-          type="number"
-          class="col"
-          :rules="[(val) => !!val || 'Obrigatório']"
-        />
-        <q-input
-          outlined
-          v-model="form.servicoId"
-          label="ID do Serviço *"
-          type="number"
-          class="col"
-          :rules="[(val) => !!val || 'Obrigatório']"
-        />
-      </div>
-
-      <q-select
-        outlined
-        v-model="form.status"
-        :options="statusOptions"
-        label="Status *"
-        emit-value
-        map-options
-        :rules="[(val) => !!val || 'Obrigatório']"
-      />
-
-      <q-input
-        outlined
-        v-model="form.descricao"
-        label="Descrição *"
-        type="textarea"
-        :rules="[(val) => !!val || 'Obrigatório']"
-      />
-
-      <div class="row q-gutter-sm q-mt-xl">
-        <q-btn
-          type="submit"
-          color="primary"
-          label="Salvar Alterações"
-          :loading="saving"
-          class="col"
-        />
-        <q-btn color="grey-7" label="Voltar" @click="voltar" :disable="saving" class="col" />
-      </div>
-    </q-form>
+    <OcorrenciaForm
+      is-edit
+      :dados-iniciais="dadosOcorrencia"
+      :loading="saving"
+      @salvar="handleSave"
+      @voltar="voltar"
+    />
   </q-page>
 </template>
 
@@ -88,76 +20,63 @@
 import { ref, onMounted } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import { api } from 'boot/axios'
+import { ocorrenciasService } from 'src/services/ocorrenciasService'
+import OcorrenciaForm from 'src/components/OcorrenciaForm.vue'
 
 const router = useRouter()
 const route = useRoute()
 
+const dadosOcorrencia = ref({})
 const ocorrenciaId = route.params.id
 
 const loadingData = ref(true)
 const saving = ref(false)
 
-const form = ref({
-  titulo: '',
-  endereco: '',
-  numero: '',
-  complemento: '',
-  descricao: '',
-  status: 'ABE',
-  cidadaoId: '',
-  servicoId: '',
-})
-
-const statusOptions = [
-  { label: 'Aberta', value: 'ABE' },
-  { label: 'Em Andamento', value: 'AND' },
-  { label: 'Fechada', value: 'FEC' },
-]
-
 onMounted(async () => {
   try {
-    const response = await api.get(`ocorrencias/api/${ocorrenciaId}/`)
-    const data = response.data
+    const data = await ocorrenciasService.getById(ocorrenciaId)
 
-    form.value.titulo = data.titulo || ''
-    form.value.endereco = data.endereco || ''
-    form.value.numero = data.numero || ''
-    form.value.complemento = data.complemento || ''
-    form.value.descricao = data.descricao || ''
-    form.value.status = data.status || 'ABE'
-    form.value.cidadaoId = data.cidadao ? String(data.cidadao) : ''
-    form.value.servicoId = data.servico ? String(data.servico) : ''
+    dadosOcorrencia.value = {
+      titulo: data.titulo || '',
+      endereco: data.endereco || '',
+      numero: data.numero || '',
+      complemento: data.complemento || '',
+      descricao: data.descricao || '',
+      status: data.status || 'ABE',
+      cidadaoId: data.cidadao ? String(data.cidadao) : '',
+      servicoId: data.servico ? String(data.servico) : '',
+    }
   } catch (error) {
     console.error('Erro ao carregar dados:', error)
     alert('Erro ao carregar a ocorrência.')
-    voltar()
+    router.push({ name: 'Ocorrencias' })
   } finally {
     loadingData.value = false
   }
 })
 
-const handleSave = async () => {
+const handleSave = async (dadosForm) => {
   saving.value = true
 
   try {
     const payload = {
-      titulo: form.value.titulo,
-      endereco: form.value.endereco,
-      numero: form.value.numero || null,
-      complemento: form.value.complemento || null,
-      descricao: form.value.descricao,
-      status: form.value.status,
-      cidadao: parseInt(form.value.cidadaoId),
-      servico: parseInt(form.value.servicoId),
+      titulo: dadosForm.titulo,
+      endereco: dadosForm.endereco,
+      numero: dadosForm.numero || null,
+      complemento: dadosForm.complemento || null,
+      descricao: dadosForm.descricao,
+      status: dadosForm.status,
+      cidadao: parseInt(dadosForm.cidadaoId),
+      servico: parseInt(dadosForm.servicoId),
     }
 
-    if (form.value.status === 'FEC') {
+    if (dadosForm.status === 'FEC') {
       payload.fechado_em = new Date().toISOString()
     } else {
       payload.fechado_em = null
     }
 
-    await api.put(`ocorrencias/api/${ocorrenciaId}/`, payload)
+    await ocorrenciasService.update(ocorrenciaId, payload)
 
     router.push({ name: 'Ocorrencias' })
   } catch (error) {
