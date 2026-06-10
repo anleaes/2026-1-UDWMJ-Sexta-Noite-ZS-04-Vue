@@ -4,7 +4,7 @@
       outlined
       v-model="form.nome"
       label="Nome *"
-      :rules="[(val) => (val && val.length > 0) || 'Campo Obrigatório']"
+      :rules="[(val) => !!val || 'Obrigatório']"
     />
 
     <q-input outlined v-model="form.descricao" label="Descrição" type="textarea" />
@@ -14,7 +14,7 @@
       v-model.number="form.nivel_prioridade"
       label="Nível de Prioridade *"
       type="number"
-      :rules="[(val) => (val !== null && val !== '') || 'Campo Obrigatório']"
+      :rules="[(val) => !!val || 'Obrigatório']"
     />
 
     <q-input
@@ -22,12 +22,18 @@
       v-model.number="form.secretaria"
       label="ID da Secretaria *"
       type="number"
-      :rules="[(val) => (val !== null && val !== '') || 'Campo Obrigatório']"
+      :rules="[(val) => !!val || 'Obrigatório']"
     />
 
-    <div class="column q-mt-xl q-gutter-y-sm">
-      <q-btn label="Salvar" color="primary" type="submit" :loading="loading" />
-      <q-btn label="Voltar" color="grey-7" flat class="q-mr-sm" @click="$emit('voltar')" />
+    <div class="row q-gutter-sm q-mt-xl">
+      <q-btn type="submit" color="primary" label="Salvar" :loading="loading" class="col" />
+      <q-btn
+        color="grey-7"
+        label="Voltar"
+        @click="$emit('voltar')"
+        :disable="loading"
+        class="col"
+      />
     </div>
   </q-form>
 </template>

@@ -1,5 +1,5 @@
 <template>
-  <q-page class="bg-white q-pa-md">
+  <q-page class="q-pa-md" style="max-width: 600px; margin: 0 auto">
     <div class="text-h5 text-weight-bold text-center q-mb-lg text-grey-9">Editar Equipamento</div>
 
     <EquipamentoForm

@@ -11,14 +11,14 @@
       outlined
       v-model="form.nome"
       label="Nome *"
-      :rules="[(val) => !!val || 'Campo Obrigatório']"
+      :rules="[(val) => !!val || 'Obrigatório']"
     />
 
     <q-input
       outlined
       v-model="form.sobrenome"
       label="Sobrenome *"
-      :rules="[(val) => !!val || 'Campo Obrigatório']"
+      :rules="[(val) => !!val || 'Obrigatório']"
     />
 
     <q-input
@@ -27,7 +27,7 @@
       label="CPF *"
       mask="###.###.###-##"
       unmasked-value
-      :rules="[(val) => !!val || 'Campo Obrigatório']"
+      :rules="[(val) => !!val || 'Obrigatório']"
     />
 
     <q-input
@@ -35,7 +35,7 @@
       v-model="form.email"
       label="E-mail *"
       type="email"
-      :rules="[(val) => !!val || 'Campo Obrigatório']"
+      :rules="[(val) => !!val || 'Obrigatório']"
     />
 
     <q-input
@@ -43,7 +43,7 @@
       v-model="form.userId"
       label="ID do User *"
       type="number"
-      :rules="[(val) => !!val || 'Campo Obrigatório']"
+      :rules="[(val) => !!val || 'Obrigatório']"
     />
 
     <div
@@ -58,14 +58,14 @@
       v-model="form.fone"
       label="Telefone *"
       type="tel"
-      :rules="[(val) => !!val || 'Campo Obrigatório']"
+      :rules="[(val) => !!val || 'Obrigatório']"
     />
 
     <q-input
       outlined
       v-model="form.endereco"
       label="Endereço *"
-      :rules="[(val) => !!val || 'Campo Obrigatório']"
+      :rules="[(val) => !!val || 'Obrigatório']"
     />
 
     <q-input
@@ -74,28 +74,24 @@
       label="CEP *"
       mask="#####-###"
       unmasked-value
-      :rules="[(val) => !!val || 'Campo Obrigatório']"
+      :rules="[(val) => !!val || 'Obrigatório']"
     />
 
     <q-input
       outlined
       v-model="form.bairro"
       label="Bairro *"
-      :rules="[(val) => !!val || 'Campo Obrigatório']"
+      :rules="[(val) => !!val || 'Obrigatório']"
     />
 
-    <div class="column q-mt-xl q-gutter-y-sm">
+    <div class="row q-gutter-sm q-mt-xl">
+      <q-btn type="submit" color="primary" label="Salvar" :loading="loading" class="col" />
       <q-btn
-        label="Salvar"
-        style="background-color: #4b7be5 !important; color: white"
-        type="submit"
-        :loading="loading"
-      />
-      <q-btn
+        color="grey-7"
         label="Voltar"
-        style="background-color: #6c757d !important; color: white"
-        unelevated
         @click="$emit('voltar')"
+        :disable="loading"
+        class="col"
       />
     </div>
 

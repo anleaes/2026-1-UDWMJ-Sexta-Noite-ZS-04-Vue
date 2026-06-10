@@ -4,7 +4,7 @@
       outlined
       v-model="form.nome"
       label="Nome *"
-      :rules="[(val) => !!val || 'Campo Obrigatório']"
+      :rules="[(val) => !!val || 'Obrigatório']"
     />
 
     <q-input
@@ -12,14 +12,14 @@
       v-model="form.sigla"
       label="Sigla *"
       @update:model-value="(val) => (form.sigla = val.toUpperCase())"
-      :rules="[(val) => !!val || 'Campo Obrigatório']"
+      :rules="[(val) => !!val || 'Obrigatório']"
     />
 
     <q-input
       outlined
       v-model="form.site"
       label="Site *"
-      :rules="[(val) => !!val || 'Campo Obrigatório']"
+      :rules="[(val) => !!val || 'Obrigatório']"
     />
 
     <q-input
@@ -27,18 +27,18 @@
       v-model="form.descricao"
       label="Descrição *"
       type="textarea"
-      :rules="[(val) => !!val || 'Campo Obrigatório']"
+      :rules="[(val) => !!val || 'Obrigatório']"
     />
 
-    <div class="column q-mt-xl q-gutter-y-sm">
+    <div class="row q-gutter-sm q-mt-xl">
+      <q-btn type="submit" color="primary" label="Salvar" :loading="loading" class="col" />
       <q-btn
-        label="Salvar"
-        color="primary"
-        style="background-color: #4b7be5 !important"
-        type="submit"
-        :loading="saving"
+        color="grey-7"
+        label="Voltar"
+        @click="$emit('voltar')"
+        :disable="loading"
+        class="col"
       />
-      <q-btn label="Voltar" color="grey-7" flat @click="$emit('voltar')" />
     </div>
   </q-form>
 </template>
