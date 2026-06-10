@@ -33,13 +33,10 @@
     </div>
 
     <q-page-sticky position="bottom-right" :offset="[20, 20]">
-      <q-btn
-        fab
-        icon="add"
-        style="background-color: #0d47a1; color: white"
-        @click="irParaCriacao"
-      />
+      <q-btn fab icon="add" color="indigo-9" @click="irParaCriacao" />
     </q-page-sticky>
+
+    <div style="height: 80px"></div>
   </q-page>
 </template>
 
