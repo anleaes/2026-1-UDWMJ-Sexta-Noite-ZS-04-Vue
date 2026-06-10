@@ -25,9 +25,9 @@
       :rules="[(val) => (val !== null && val !== '') || 'Campo Obrigatório']"
     />
 
-    <div class="row justify-end q-mt-xl">
-      <q-btn label="Cancelar" color="grey-7" flat class="q-mr-sm" @click="$emit('cancelar')" />
+    <div class="column q-mt-xl q-gutter-y-sm">
       <q-btn label="Salvar" color="primary" type="submit" :loading="loading" />
+      <q-btn label="Voltar" color="grey-7" flat class="q-mr-sm" @click="$emit('voltar')" />
     </div>
   </q-form>
 </template>
@@ -51,7 +51,7 @@ const props = defineProps({
   },
 })
 
-const emit = defineEmits(['salvar', 'cancelar'])
+const emit = defineEmits(['salvar', 'voltar'])
 
 const form = ref({ ...props.dadosIniciais })
 
