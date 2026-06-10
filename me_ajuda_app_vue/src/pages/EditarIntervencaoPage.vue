@@ -6,77 +6,12 @@
       <q-spinner color="primary" size="3em" />
     </div>
 
-    <q-form v-else @submit.prevent="handleSave" class="q-gutter-md">
-      <q-input
-        outlined
-        v-model="form.titulo"
-        label="Título *"
-        :rules="[(val) => !!val || 'Campo obrigatório']"
-      />
-
-      <div class="row q-gutter-sm">
-        <q-input
-          outlined
-          v-model="form.dataExec"
-          label="Data de Execução *"
-          mask="##/##/####"
-          placeholder="DD/MM/AAAA"
-          class="col-12 col-sm-6"
-          :rules="[
-            (val) => !!val || 'Campo obrigatório',
-            (val) => val.length === 10 || 'Data inválida',
-          ]"
-        />
-        <q-input
-          outlined
-          v-model="form.custoTrab"
-          label="Custo do Trabalho *"
-          type="number"
-          prefix="R$"
-          step="0.01"
-          class="col-12 col-sm"
-          :rules="[(val) => !!val || 'Campo obrigatório']"
-        />
-      </div>
-
-      <div class="row q-gutter-sm">
-        <q-input
-          outlined
-          v-model="form.ocorrenciaId"
-          label="ID da Ocorrência *"
-          type="number"
-          class="col"
-          :rules="[(val) => !!val || 'Campo obrigatório']"
-        />
-        <q-input
-          outlined
-          v-model="form.funcionarioId"
-          label="ID do Funcionário *"
-          type="number"
-          class="col"
-          :rules="[(val) => !!val || 'Campo obrigatório']"
-        />
-      </div>
-
-      <q-input
-        outlined
-        v-model="form.relato"
-        label="Relato *"
-        type="textarea"
-        :rules="[(val) => !!val || 'Campo obrigatório']"
-      />
-
-      <div class="row q-gutter-sm q-mt-xl">
-        <q-btn
-          type="submit"
-          color="primary"
-          label="Salvar Alterações"
-          :loading="saving"
-          class="col"
-        />
-        <q-btn color="grey-7" label="Voltar" @click="voltar" :disable="saving" class="col" />
-      </div>
-    </q-form>
+    <IntervencaoForm
+      :dados-iniciais="dadosIntervencao"
+      :loading="saving"
+      @salvar="handleSave"
+      @voltar="voltar"
+    />
   </q-page>
 </template>
 
@@ -84,35 +19,31 @@
 import { ref, onMounted } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import { api } from 'boot/axios'
+import IntervencaoForm from 'src/components/IntervencaoForm.vue'
+import { intervencoesService } from 'src/services/intervencoesService'
 
 const router = useRouter()
 const route = useRoute()
+
+const dadosIntervencao = ref({})
 
 const intervencaoId = route.params.id
 
 const loadingData = ref(true)
 const saving = ref(false)
 
-const form = ref({
-  titulo: '',
-  dataExec: '',
-  relato: '',
-  custoTrab: '',
-  ocorrenciaId: '',
-  funcionarioId: '',
-})
-
 onMounted(async () => {
   try {
-    const response = await api.get(`intervencoes/api/${intervencaoId}/`)
-    const data = response.data
+    const data = await intervencoesService.getById(intervencaoId)
 
-    form.value.titulo = data.titulo || ''
-    form.value.dataExec = data.data_exec ? data.data_exec.split('-').reverse().join('/') : ''
-    form.value.relato = data.relato || ''
-    form.value.custoTrab = data.custo_trab ? String(data.custo_trab) : ''
-    form.value.ocorrenciaId = data.ocorrencia ? String(data.ocorrencia) : ''
-    form.value.funcionarioId = data.funcionario ? String(data.funcionario) : ''
+    dadosIntervencao.value = {
+      titulo: data.titulo || '',
+      dataExec: data.data_exec ? data.data_exec.split('-').reverse().join('/') : '',
+      relato: data.relato || '',
+      custoTrab: data.custo_trab ? String(data.custo_trab) : '',
+      ocorrenciaId: data.ocorrencia ? String(data.ocorrencia) : '',
+      funcionarioId: data.funcionario ? String(data.funcionario) : '',
+    }
   } catch (error) {
     console.error('Erro ao carregar dados:', error)
     alert('Erro ao carregar a intervenção.')
@@ -122,20 +53,20 @@ onMounted(async () => {
   }
 })
 
-const handleSave = async () => {
+const handleSave = async (dadosForm) => {
   saving.value = true
 
   try {
     const payload = {
-      titulo: form.value.titulo,
-      data_exec: form.value.dataExec.split('/').reverse().join('-'),
-      relato: form.value.relato,
-      custo_trab: parseFloat(form.value.custoTrab),
-      ocorrencia: parseInt(form.value.ocorrenciaId),
-      funcionario: parseInt(form.value.funcionarioId),
+      titulo: dadosForm.titulo,
+      data_exec: dadosForm.dataExec.split('/').reverse().join('-'),
+      relato: dadosForm.relato,
+      custo_trab: parseFloat(dadosForm.custoTrab),
+      ocorrencia: parseInt(dadosForm.ocorrenciaId),
+      funcionario: parseInt(dadosForm.funcionarioId),
     }
 
-    await api.put(`intervencoes/api/${intervencaoId}/`, payload)
+    await intervencoesService.update(intervencaoId, payload)
 
     router.push({ name: 'Intervencoes' })
   } catch (error) {

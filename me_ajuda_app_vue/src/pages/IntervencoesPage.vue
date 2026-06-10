@@ -15,7 +15,7 @@
         :dados="{
           ID: item.id,
           'Data da Execução': formatarData(item.data_exec),
-          Custo: `R$ ${Number(item.custo_trab).toFixed(2)}`,
+          Custo: `R$ ${Number(item.custo_trab).toFixed(2).replace('.', ',')}`,
           Relato: limitarTexto(item.relato, 100),
         }"
         @editar="irParaEdicao"
