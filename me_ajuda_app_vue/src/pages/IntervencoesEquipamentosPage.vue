@@ -22,6 +22,10 @@
         @editar="irParaEdicao"
         @excluir="excluirAlocacao"
       />
+
+      <div v-if="intervencoesEquipamentos.length === 0" class="text-center text-grey-6 q-mt-xl">
+        Nenhuma alocação encontrada.
+      </div>
     </div>
 
     <q-page-sticky position="bottom-right" :offset="[20, 20]">

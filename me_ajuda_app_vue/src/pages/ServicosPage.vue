@@ -30,6 +30,10 @@
           </q-badge>
         </template>
       </InfoCard>
+
+      <div v-if="servicos.length === 0" class="text-center text-grey-6 q-mt-xl">
+        Nenhum serviço encontrado.
+      </div>
     </div>
 
     <q-page-sticky position="bottom-right" :offset="[20, 20]">

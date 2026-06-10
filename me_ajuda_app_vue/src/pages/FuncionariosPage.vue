@@ -23,6 +23,10 @@
         @editar="irParaEdicao"
         @excluir="excluirFuncionario"
       />
+
+      <div v-if="funcionarios.length === 0" class="text-center text-grey-6 q-mt-xl">
+        Nenhum funcionário encontrado.
+      </div>
     </div>
 
     <q-page-sticky position="bottom-right" :offset="[20, 20]">
