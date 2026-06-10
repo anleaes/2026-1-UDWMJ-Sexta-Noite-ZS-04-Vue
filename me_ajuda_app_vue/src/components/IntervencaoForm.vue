@@ -4,7 +4,7 @@
       outlined
       v-model="form.titulo"
       label="Título *"
-      :rules="[(val) => !!val || 'Campo obrigatório']"
+      :rules="[(val) => !!val || 'Obrigatório']"
     />
 
     <div class="row q-gutter-sm">
@@ -17,7 +17,7 @@
         class="col-12 col-sm-6"
         lazy-rules
         :rules="[
-          (val) => !!val || 'Campo obrigatório',
+          (val) => !!val || 'Obrigatório',
           (val) => val.length === 10 || 'Data inválida',
         ]"
       />
@@ -29,7 +29,7 @@
         prefix="R$"
         step="0.01"
         class="col-12 col-sm"
-        :rules="[(val) => !!val || 'Campo obrigatório']"
+        :rules="[(val) => !!val || 'Obrigatório']"
       />
     </div>
 
@@ -40,7 +40,7 @@
         label="ID da Ocorrência *"
         type="number"
         class="col"
-        :rules="[(val) => !!val || 'Campo obrigatório']"
+        :rules="[(val) => !!val || 'Obrigatório']"
       />
       <q-input
         outlined
@@ -48,7 +48,7 @@
         label="ID do Funcionário *"
         type="number"
         class="col"
-        :rules="[(val) => !!val || 'Campo obrigatório']"
+        :rules="[(val) => !!val || 'Obrigatório']"
       />
     </div>
 
@@ -57,7 +57,7 @@
       v-model="form.relato"
       label="Relato *"
       type="textarea"
-      :rules="[(val) => !!val || 'Campo obrigatório']"
+      :rules="[(val) => !!val || 'Obrigatório']"
     />
 
     <div class="row q-gutter-sm q-mt-xl">

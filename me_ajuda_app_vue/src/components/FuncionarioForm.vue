@@ -8,14 +8,14 @@
       outlined
       v-model="form.nome"
       label="Nome *"
-      :rules="[(val) => !!val || 'Campo obrigatório']"
+      :rules="[(val) => !!val || 'Obrigatório']"
     />
 
     <q-input
       outlined
       v-model="form.sobrenome"
       label="Sobrenome *"
-      :rules="[(val) => !!val || 'Campo obrigatório']"
+      :rules="[(val) => !!val || 'Obrigatório']"
     />
 
     <q-input
@@ -24,7 +24,7 @@
       label="CPF *"
       mask="###.###.###-##"
       unmasked-value
-      :rules="[(val) => !!val || 'Campo obrigatório']"
+      :rules="[(val) => !!val || 'Obrigatório']"
     />
 
     <q-input
@@ -32,7 +32,7 @@
       v-model="form.email"
       label="E-mail *"
       type="email"
-      :rules="[(val) => !!val || 'Campo obrigatório']"
+      :rules="[(val) => !!val || 'Obrigatório']"
     />
 
     <q-input
@@ -40,7 +40,7 @@
       v-model="form.userId"
       label="ID do User *"
       type="number"
-      :rules="[(val) => !!val || 'Campo obrigatório']"
+      :rules="[(val) => !!val || 'Obrigatório']"
     />
 
     <div class="text-h6 text-primary q-mt-lg q-pb-xs" style="border-bottom: 1px solid #eee">
@@ -52,14 +52,14 @@
       v-model="form.secretarias"
       label="Secretarias (IDs, separados por vírgula) *"
       placeholder="Ex: 1, 2, 3"
-      :rules="[(val) => !!val || 'Campo obrigatório']"
+      :rules="[(val) => !!val || 'Obrigatório']"
     />
 
     <q-input
       outlined
       v-model="form.registro"
       label="Registro (Matrícula) *"
-      :rules="[(val) => !!val || 'Campo obrigatório']"
+      :rules="[(val) => !!val || 'Obrigatório']"
     />
 
     <q-select
@@ -69,7 +69,7 @@
       label="Função"
       emit-value
       map-options
-      :rules="[(val) => !!val || 'Campo obrigatório']"
+      :rules="[(val) => !!val || 'Obrigatório']"
     />
 
     <q-toggle v-model="form.ativo" label="Funcionário Ativo?" color="primary" class="q-mt-md" />

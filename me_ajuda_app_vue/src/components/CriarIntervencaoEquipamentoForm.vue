@@ -112,19 +112,13 @@
     </q-list>
 
     <div class="row q-gutter-sm q-mt-xl">
-      <q-btn
-        type="submit"
-        color="primary"
-        label="Salvar"
-        :loading="loading"
-        class="col-12 q-mb-sm"
-      />
+      <q-btn type="submit" color="primary" label="Salvar" :loading="loading" class="col" />
       <q-btn
         color="grey-7"
         label="Voltar"
         @click="$emit('voltar')"
         :disable="loading"
-        class="col-12"
+        class="col"
       />
     </div>
   </q-form>
