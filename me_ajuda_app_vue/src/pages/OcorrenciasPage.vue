@@ -37,6 +37,10 @@
           />
         </template>
       </InfoCard>
+
+      <div v-if="ocorrencias.length === 0" class="text-center text-grey-6 q-mt-xl">
+        Nenhuma ocorrência encontrada.
+      </div>
     </div>
 
     <q-page-sticky position="bottom-right" :offset="[20, 20]">
