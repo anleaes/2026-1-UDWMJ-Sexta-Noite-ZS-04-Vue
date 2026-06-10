@@ -48,7 +48,7 @@ const handleSave = async (dadosForm) => {
   saving.value = true
 
   try {
-    await equipamentosService.create({
+    await equipamentosService.update(equipamentoId.value, {
       nome: dadosForm.nome,
       descricao: dadosForm.descricao,
       preco: parseFloat(dadosForm.preco),
